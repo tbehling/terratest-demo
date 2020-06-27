@@ -3,6 +3,8 @@
 package main
 
 import (
+	"testing"
+
     "github.com/magefile/mage/sh"
 )
 
@@ -12,3 +14,17 @@ func Build() error {
 	}
 	return nil
 }
+
+func Terratest() error {
+	return RunGoTests([]testing.InternalTest{
+		{
+			Name: "TestRunTerratest",
+			F:     TestRunTerratest,
+		},
+	})
+}
+
+func TestRunTerratest(t *testing.T) {
+	t.Error("placeholder failure")
+}
+
