@@ -5,7 +5,10 @@ package main
 import (
 	"testing"
 
-    "github.com/magefile/mage/sh"
+	"github.com/magefile/mage/sh"
+	"github.com/gruntwork-io/terratest/modules/terraform"
+	"github.com/stretchr/testify/assert"
+
 )
 
 func Build() error {
