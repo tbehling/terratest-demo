@@ -20,6 +20,9 @@ func Build() error {
 
 func Terratest() error {
 	return RunGoTests([]testing.InternalTest{
+		{Name: "TestTerraformHello", F: TestTerraformHello},
+	})
+}
 
 func TerratestHttp() error {
 	return RunGoTests([]testing.InternalTest{
@@ -27,7 +30,7 @@ func TerratestHttp() error {
 	})
 }
 
-func TestRunTerratest(t *testing.T) {
+func TestTerraformHello(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		// Set the path to the Terraform code that will be tested.
 		TerraformDir: ".",
