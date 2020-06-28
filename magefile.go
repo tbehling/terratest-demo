@@ -20,10 +20,10 @@ func Build() error {
 
 func Terratest() error {
 	return RunGoTests([]testing.InternalTest{
-		{
-			Name: "TestRunTerratest",
-			F:     TestRunTerratest,
-		},
+
+func TerratestHttp() error {
+	return RunGoTests([]testing.InternalTest{
+		{Name: "TestHttp", F: TestHttp},
 	})
 }
 
@@ -44,3 +44,21 @@ func TestRunTerratest(t *testing.T) {
 	assert.Equal(t, "Hello, World!", output)
 }
 
+func TestHttp(t *testing.T) {
+	withDockerContainer(t, "nginx", func(ci *docker.ContainerInspect) {
+		url := fmt.Sprintf("http://%s:%d", "localhost", ci.Ports[0].HostPort)
+
+		http_helper.HttpGetWithRetryWithCustomValidation(t, url, nil, 30, time.Second, func(code int, body string) bool {
+			return assert.Equal(t, code, 200) && assert.Contains(t, body, "Welcome to nginx!")
+		})
+	})
+}
+
+func withDockerContainer(t *testing.T, tag string, f func(*docker.ContainerInspect)) {
+	opts := &docker.RunOptions{Detach: true, Remove: true, OtherOptions: []string{"-P"}}
+	docker_id := docker.RunAndGetID(t, tag, opts)
+	defer docker.Stop(t, []string{docker_id}, &docker.StopOptions{})
+	container_info := docker.Inspect(t, docker_id)
+
+	f(container_info)
+}
