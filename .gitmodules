@@ -1,0 +1,3 @@
+[submodule "mage"]
+	path = mage
+	url = git@github.com:magefile/mage
