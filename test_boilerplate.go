@@ -3,10 +3,10 @@
 package main
 
 import (
-	"io"
-	"testing"
-	"regexp"
 	"errors"
+	"io"
+	"regexp"
+	"testing"
 )
 
 func RunGoTests(tests []testing.InternalTest) error {
@@ -18,7 +18,7 @@ func RunGoTests(tests []testing.InternalTest) error {
 }
 
 // nullTestDeps implements testing.testDeps to stub dependencies for testing.MainStart()
-// 
+//
 // See https://stackoverflow.com/questions/59064256/is-it-possible-to-call-a-test-func-from-another-file-to-start-the-testing
 //     https://golang.org/src/testing/testing.go?s=38015:38129#L1146
 //     https://golang.org/src/testing/internal/testdeps/deps.go
@@ -30,5 +30,5 @@ func (d *nullTestDeps) StopCPUProfile()                                   {}
 func (d *nullTestDeps) WriteHeapProfile(_ io.Writer) error                { return nil }
 func (d *nullTestDeps) WriteProfileTo(_ string, _ io.Writer, _ int) error { return nil }
 func (d *nullTestDeps) ImportPath() string                                { return "" }
-func (d *nullTestDeps) StartTestLog(io.Writer) { return }
-func (d *nullTestDeps) StopTestLog() error { return nil}
+func (d *nullTestDeps) StartTestLog(io.Writer)                            { return }
+func (d *nullTestDeps) StopTestLog() error                                { return nil }

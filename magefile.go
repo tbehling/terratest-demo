@@ -3,12 +3,16 @@
 package main
 
 import (
+	"fmt"
 	"testing"
+	"time"
 
-	"github.com/magefile/mage/sh"
+	"github.com/gruntwork-io/terratest/modules/docker"
+	http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
+	"github.com/magefile/mage/sh"
 
+	"github.com/stretchr/testify/assert"
 )
 
 func Build() error {
