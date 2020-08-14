@@ -102,4 +102,8 @@ func TestConsul3(t *testing.T) {
 		logger.Log(t, members[1].Name, members[1].Addr)
 		logger.Log(t, members[2].Name, members[2].Addr)
 	})
+
+	t.Run("Read KV values from the 3 nodes with and without stale", func(t *testing.T) {
+
+	})
 }
